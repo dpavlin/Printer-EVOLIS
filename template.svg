@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,7 +14,7 @@
    height="194.39999"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.47 r22583"
    version="1.0"
    sodipodi:docname="template.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
@@ -60,7 +61,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.1700579"
-     inkscape:cx="152.36301"
+     inkscape:cx="168.05511"
      inkscape:cy="97.441175"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -75,7 +76,8 @@
      inkscape:window-y="19"
      borderlayer="true"
      inkscape:bbox-paths="true"
-     inkscape:bbox-nodes="true">
+     inkscape:bbox-nodes="true"
+     inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
        id="grid2383"
@@ -203,7 +205,7 @@
      style="display:inline">
     <text
        xml:space="preserve"
-       style="font-size:12.99999995px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
+       style="font-size:14.99999994;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial Black;-inkscape-font-specification:'Arial Black, Bold'"
        x="17.943676"
        y="118.02072"
        id="text2385"
@@ -213,10 +215,10 @@
          id="tspan2387"
          x="17.943676"
          y="118.02072"
-         style="font-size:12.99999995px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr;text-anchor:start;font-family:Verdana;-inkscape-font-specification:Verdana Bold">200908109999</tspan></text>
+         style="font-size:14.99999994000000036;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial Bold">200908109999</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:12.99999995px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:150%;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Verdana;-inkscape-font-specification:Verdana"
+       style="font-size:13.99999994;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:150%;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
        x="17.269848"
        y="141.6068"
        id="text2389"
@@ -226,24 +228,22 @@
          id="tspan2391"
          x="17.269848"
          y="141.6068"
-         style="font-size:12.99999995px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:150%;writing-mode:lr;text-anchor:start;font-family:Verdana;-inkscape-font-specification:Verdana">Knjižničarko</tspan><tspan
+         style="font-size:14.99999994000000036;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:150%;writing-mode:lr;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial">Knjižničarko</tspan><tspan
          sodipodi:role="line"
          x="17.269848"
          y="161.1068"
-         style="font-size:12.99999995px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:150%;writing-mode:lr;text-anchor:start;font-family:Verdana;-inkscape-font-specification:Verdana"
+         style="font-size:14.99999994000000036;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:150%;writing-mode:lr;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
          id="tspan2393">Čitalić</tspan></text>
-    <path
-       sodipodi:type="spiral"
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       id="path2435"
-       sodipodi:cx="274.60629"
-       sodipodi:cy="164.76378"
-       sodipodi:expansion="1"
-       sodipodi:revolution="3"
-       sodipodi:radius="12.40158"
-       sodipodi:argument="-17.278759"
-       sodipodi:t0="0"
-       d="M 274.60629,164.76378 C 274.60629,165.38557 273.76812,165.07055 273.57283,164.76378 C 273.04359,163.93244 273.80559,162.95172 274.60629,162.69685 C 276.03857,162.24094 277.41687,163.39805 277.70669,164.76378 C 278.132,166.76805 276.53495,168.59068 274.60629,168.89764 C 272.03569,169.30676 269.75618,167.25518 269.43897,164.76378 C 269.03979,161.62859 271.55209,158.88705 274.6063,158.56299 C 278.30535,158.17051 281.51159,161.14673 281.84055,164.76378 C 282.22821,169.02635 278.78623,172.69887 274.60629,173.0315 C 269.78038,173.41553 265.64059,169.50662 265.30511,164.76377 C 264.92391,159.37464 269.30052,154.7669 274.6063,154.42913 C 280.55858,154.0502 285.63476,158.89507 285.97441,164.76379 C 286.35148,171.27918 281.03795,176.82415 274.60629,177.16536"
-       transform="matrix(0.7041641,-0.7451919,0.7264457,0.7223361,-26.05976,264.90308)" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="272.07465"
+       y="187.46471"
+       id="text2856"><tspan
+         sodipodi:role="line"
+         id="tspan2858"
+         x="272.07465"
+         y="187.46471"
+         style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">15pt</tspan></text>
   </g>
 </svg>
