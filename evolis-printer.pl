@@ -18,10 +18,13 @@ local $/ = "\r";
 my $page = 1;
 
 while(<>) {
-	die "no escape at beginning" unless s/^\x1B//;
+	s/\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0// && warn "FIXME: string 15 null bytes";
+
+	die "no escape at beginning",dump($_) unless s/^\x1B//;
 	chomp;
 	my @a = split(/;/,$_);
 	my $c = shift @a;
+	warn "# $c ",dump(@a);
 	if ( $c eq 'Pmi' ) {
 		my $f = $a[0] || die 'missing feeder';
 		print "feeder $f | $feeder->{$f}\n";
@@ -40,19 +43,20 @@ while(<>) {
 			warn "# slurp more ",length($data), " < $len\n";
 			$data .= <>;
 		}
-		$len == length $data or die "wrong length $len != ", length $data;
+		$len == length $data or warn "wrong length $len != ", length $data;
 
 		my $path = "page-$page-$color.pbm";
 		open(my $pbm, '>', $path);
 
-		my $w = 1016;
-		my $h = 648;
+		my ( $w, $h ) = ( 646, 1081 );	# from driver
+#		( $w, $h ) = ( 636, 994 );		# from test card
 
 		$h = int( $len * 8 / $w );
 
 		print $pbm "P4\n$w $h\n", $data;
 		close($pbm);
-		print "printed $path $w * $h size ", -s $path, "\n";
+		print "$path $w * $h size ", -s $path, "\n";
+		$page++;
 	} else {
 		warn "UNKNOWN: $c ", dump(@a);
 	}
