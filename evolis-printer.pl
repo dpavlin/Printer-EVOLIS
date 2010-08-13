@@ -43,19 +43,31 @@ while(<>) {
 		$page++;
 		save_pbm $path, 648, 1015, $data;	# FIXME 1016?
 	} elsif ( $c eq 'Dbc' ) { # XXX not in cups
-		my ( $color, $line, $len, $data ) = @a;
-		while ( $len > length($data) ) {
-			warn "# slurp more ",length($data), " < $len\n";
-			$data .= <>;
+		my ( $color, $line, $len, $comp ) = @a;
+		while ( $len > length($comp) ) {
+			warn "# slurp more ",length($comp), " < $len\n";
+			$comp .= <>;
 		}
-		$len == length $data or warn "wrong length $len != ", length $data;
+		$len == length $comp or warn "wrong length $len != ", length $comp;
+
+		my ( $w, $h ) = ( 646, 1081 );	# from driver
+
+		my $data;
+		my $i = 0;
+		while ( $i < length $comp ) {
+			my $len = ord(substr($comp,$i,4));
+			$i += 1;
+			warn "$i comp $len\n";
+			$data .= substr($comp,$i,$len);
+			$data .= "\x00" x ( $w - $len );
+			$i += $len;
+		}
+
 
 		my $path = "page-Dbc-$color-$page.pbm";
 		$page++;
 
-		my ( $w, $h ) = ( 646, 1081 );	# from driver
-#		( $w, $h ) = ( 636, 994 );		# from test card
-		$h = int( length($data) * 8 / $w );
+		#$h = int( length($data) * 8 / $w );
 		save_pbm $path, $w, $h, $data;
 
 	} else {
