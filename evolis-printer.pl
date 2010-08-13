@@ -52,7 +52,10 @@ while(<>) {
 
 		my ( $w, $h ) = ( 646, 1081 );	# from driver
 
+=for non-working
+
 		my $data;
+
 		my $i = 0;
 		while ( $i < length $comp ) {
 			my $len = ord(substr($comp,$i,4));
@@ -63,6 +66,9 @@ while(<>) {
 			$i += $len;
 		}
 
+=cut
+
+		my $data = $comp;
 
 		my $path = "page-Dbc-$color-$page.pbm";
 		$page++;
