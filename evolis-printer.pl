@@ -20,13 +20,10 @@ my $page = 1;
 sub save_pbm;
 
 while(<>) {
-	s/\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0// && warn "FIXME: string 15 null bytes";
-
 	die "no escape at beginning",dump($_) unless s/^\x1B//;
 	chomp;
 	my @a = split(/;/,$_);
 	my $c = shift @a;
-	warn "# $c @a\n";
 	if ( $c eq 'Pmi' ) {
 		my $f = $a[0] || die 'missing feeder';
 		print "feeder $f | $feeder->{$f}\n";
