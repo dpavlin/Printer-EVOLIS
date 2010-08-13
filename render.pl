@@ -20,7 +20,13 @@ sub mapping { $mapping->{ $_[0] } }
 
 my $re = join('|', keys %$mapping);
 
+mkdir 'out' unless -d 'out';
 my $out = 'out/' . $nr;
+
+foreach my $existing ( glob $out . '*' ) {
+	warn "# remove $existing ", -s $existing, " bytes\n";
+	unlink $existing;
+}
 
 open(my $in,     '<', 'template.svg');
 open(my $print,  '>', "$out.print.svg");
@@ -50,10 +56,19 @@ close($in);
 close($print);
 close($screen);
 
-system "inkscape --file $out.print.svg  --export-pdf $out.pdf";
-system "inkscape --file $out.screen.svg --export-png $out.png --export-dpi 180";
+#system "inkscape --file $out.print.svg  --export-pdf $out.pdf";
 
-system "inkscape --file $out.screen.svg --export-png $out.300.png --export-dpi 300";
+system "inkscape --file $out.print.svg --export-area-page --export-pdf $out.print-front.pdf --export-id print-front";
+system "inkscape --file $out.print.svg --export-area-page --export-pdf $out.print-back.pdf --export-id print-back";
+system "pdftk  $out.print-front.pdf $out.print-back.pdf cat output $out.print-duplex.pdf";
+
+#system "inkscape --file $out.screen.svg --export-png $out.png --export-dpi 180";
+
+#system "inkscape --file $out.screen.svg --export-png $out.300.png --export-dpi 300";
+
+system "inkscape --file $out.print.svg --export-area-page --export-png $out.print-front.png --export-dpi 150 --export-id print-front --export-id-only";
+system "inkscape --file $out.print.svg --export-area-page --export-png $out.print-back.png --export-dpi 150 --export-id print-back --export-id-only";
+
 
 #system "qiv $out.png";
 #system "xpdf $out.pdf";
