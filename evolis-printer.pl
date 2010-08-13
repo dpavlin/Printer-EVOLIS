@@ -20,7 +20,8 @@ my $page = 1;
 sub save_pbm;
 
 while(<>) {
-	die "no escape at beginning",dump($_) unless s/^\x1B//;
+	die "no escape at beginning",dump($_) unless s/^(\x00*)\x1B//;
+	warn "WARNING: ", length($1), " extra nulls before ESC\n" if $1;
 	chomp;
 	my @a = split(/;/,$_);
 	my $c = shift @a;
@@ -50,7 +51,7 @@ while(<>) {
 		}
 		$len == length $comp or warn "wrong length $len != ", length $comp;
 
-		my ( $w, $h ) = ( 646, 1081 );	# from driver
+		my $w = 648 / 2;
 
 =for non-working
 
@@ -73,7 +74,7 @@ while(<>) {
 		my $path = "page-Dbc-$color-$page.pbm";
 		$page++;
 
-		#$h = int( length($data) * 8 / $w );
+		my $h = int( $len / 128 );
 		save_pbm $path, $w, $h, $data;
 
 	} else {
