@@ -37,6 +37,8 @@ while(<>) {
 	} elsif ( $c eq 'Pr' ) {
 		print "improve $a[0]\n";
 		# FIXME windows sends it, cups doesn't
+	} elsif ( $c eq 'Sv' ) {
+		print "even page on duplex printing\n";
 	} elsif ( $c eq 'Db' ) { # XXX not in cups
 		my ( $color, $two, $data ) = @a;
 		$two eq '2' or die '2';
