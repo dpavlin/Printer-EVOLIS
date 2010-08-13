@@ -17,6 +17,8 @@ local $/ = "\r";
 
 my $page = 1;
 
+sub save_pbm;
+
 while(<>) {
 	s/\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0// && warn "FIXME: string 15 null bytes";
 
@@ -24,7 +26,7 @@ while(<>) {
 	chomp;
 	my @a = split(/;/,$_);
 	my $c = shift @a;
-	warn "# $c ",dump(@a);
+	warn "# $c @a\n";
 	if ( $c eq 'Pmi' ) {
 		my $f = $a[0] || die 'missing feeder';
 		print "feeder $f | $feeder->{$f}\n";
@@ -37,7 +39,13 @@ while(<>) {
 	} elsif ( $c eq 'Pr' ) {
 		print "improve $a[0]\n";
 		# FIXME windows sends it, cups doesn't
-	} elsif ( $c eq 'Dbc' ) {
+	} elsif ( $c eq 'Db' ) { # XXX not in cups
+		my ( $color, $two, $data ) = @a;
+		$two eq '2' or die '2';
+		my $path = "page-Db-$color-$page.pbm";
+		$page++;
+		save_pbm $path, 648, 1015, $data;	# FIXME 1016?
+	} elsif ( $c eq 'Dbc' ) { # XXX not in cups
 		my ( $color, $line, $len, $data ) = @a;
 		while ( $len > length($data) ) {
 			warn "# slurp more ",length($data), " < $len\n";
@@ -45,19 +53,23 @@ while(<>) {
 		}
 		$len == length $data or warn "wrong length $len != ", length $data;
 
-		my $path = "page-$page-$color.pbm";
-		open(my $pbm, '>', $path);
+		my $path = "page-Dbc-$color-$page.pbm";
+		$page++;
 
 		my ( $w, $h ) = ( 646, 1081 );	# from driver
 #		( $w, $h ) = ( 636, 994 );		# from test card
+		$h = int( length($data) * 8 / $w );
+		save_pbm $path, $w, $h, $data;
 
-		$h = int( $len * 8 / $w );
-
-		print $pbm "P4\n$w $h\n", $data;
-		close($pbm);
-		print "$path $w * $h size ", -s $path, "\n";
-		$page++;
 	} else {
 		warn "UNKNOWN: $c ", dump(@a);
 	}
+}
+
+sub save_pbm {
+	my ( $path, $w, $h, $data ) = @_;
+	open(my $pbm, '>', $path);
+	print $pbm "P4\n$w $h\n", $data;
+	close($pbm);
+	print "saved $path $w * $h size ", -s $path, "\n";
 }
