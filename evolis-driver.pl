@@ -38,5 +38,13 @@ print "\x1BPc;k;=;10\r";
 print "\x1BDbc;k;2;31744;"; # bitmap data
 print "\r";
 
-print "\x1BSe\r";
+# print "\033Ste\015"; # keep card after encoding
+print "\x1BSe\r"; # eject card
 print "\x00" x 64; # FIXME some padding?
+
+sub encoding {
+my $data = "1234567890"; # data for track
+print "\033Ss\015", $data;
+print "\033Smw\015"; # write?
+}
+	
