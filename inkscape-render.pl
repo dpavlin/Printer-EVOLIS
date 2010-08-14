@@ -75,6 +75,8 @@ foreach my $pdf ( glob "$out*.pdf" ) {
 	system "gs -dNOPAUSE -dBATCH -q -r300x300 -dDEVICEWIDTHPOINTS=243 -dDEVICEHEIGHTPOINTS=155 -sDEVICE=pbmraw -sOutputFile=$pbm -f $pdf";
 }
 
+system "pdftk $out.print-front.pdf $out.print-back.pdf cat output $out.print-duplex.pdf";
+
 __END__
 
 #system "inkscape --file $out.print.svg  --export-pdf $out.pdf";
