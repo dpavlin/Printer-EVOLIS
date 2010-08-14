@@ -29,26 +29,28 @@ while(<>) {
 	my $c = shift @a;
 	if ( $c eq 'Pmi' ) {
 		my $f = $a[0] || die 'missing feeder';
-		print "feeder $f | $feeder->{$f}\n";
+		print "$_ feeder: $feeder->{$f}\n";
 		$a[1] eq 's' or die;
 	} elsif ( $c eq 'Pc' ) {
 		my $color = $a[0];
 		$a[1] eq '=' or die;
 		my $temperature = $a[2];
-		print "temperature $color = $temperature\n";
+		print "$_ temperature $color = $temperature\n";
 	} elsif ( $c eq 'Pr' ) {
-		print "improve $a[0]\n";
-		# FIXME windows sends it, cups doesn't
+		print "$_ improve (not in cups)\n";
 	} elsif ( $c eq 'Sv' ) {
-		print "even page on duplex printing\n";
+		print "$_ even page on duplex printing\n";
+	} elsif ( $c eq 'Ss' ) {
+		print "$_ encoding download",dump(@a),$/;
 	} elsif ( $c eq 'Db' ) { # XXX not in cups
+		print substr($_,0,40), " bitmap\n";
 		my ( $color, $two, $data ) = @a;
 		$two eq '2' or die '2';
-		my $path = "$name-Db-$color-$page.pbm";
-		$page++;
+		my $path = "$name-Db-$color-$page.pbm"; $page++;
 		save_pbm $path, 648, 1015, $data;	# FIXME 1016?
 	} elsif ( $c eq 'Dbc' ) { # XXX not in cups
 		my ( $color, $line, $len, $comp ) = @a;
+		print substr($_,0,40), " FIXME bitmap - compressed?\n";
 		while ( $len > length($comp) ) {
 			warn "# slurp more ",length($comp), " < $len\n";
 			$comp .= <>;
@@ -75,18 +77,16 @@ while(<>) {
 
 		my $data = $comp;
 
-		my $path = "$name-Dbc-$color-$page.pbm";
-		$page++;
-
+		my $path = "$name-Dbc-$color-$page.pbm"; $page++;
 		my $h = int( $len / 128 );
 		save_pbm $path, $w, $h, $data;
 
 	} elsif ( $c eq 'Se' ) {
 		my $zero = <>;
-		print "Se - slurping zero bytes at end ",dump($zero);
+		print "$_ slurping zero bytes at end ",dump($zero),$/;
 		exit 0;
 	} else {
-		warn "UNKNOWN: $c ", dump(@a);
+		print "FIXME: $_\n";
 	}
 }
 
