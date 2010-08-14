@@ -39,6 +39,10 @@ while(<>) {
 	} elsif ( $c eq 'Pl' ) {
 		$a[1] eq '=' or die;
 		print "$_ brightnes? $a[0] = $a[2]\n";
+	} elsif ( $c eq 'Ps' ) {
+		$a[0] eq 'k' or die;
+		$a[1] eq '=' or die;
+		print "$_ qualityK $a[0] = $a[2]\n";
 	} elsif ( $c eq 'Pr' ) {
 		print "$_ improve (not in cups)\n";
 	} elsif ( $c eq 'Ss' ) {
