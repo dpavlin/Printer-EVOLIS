@@ -7,12 +7,6 @@ use strict;
 
 use Data::Dump qw(dump);
 
-my $feeder = {qw(
-F Feeder
-M Manual
-B Auto
-)};
-
 local $/ = "\r";
 
 my $page = 1;
@@ -28,30 +22,24 @@ while(<>) {
 	my @a = split(/;/,$_);
 	my $c = shift @a;
 	if ( $c eq 'Pmi' ) {
-		my $f = $a[0] || die 'missing feeder';
-		print "$_ feeder: $feeder->{$f}\n";
-		$a[1] eq 's' or die;
+		print "$_ mode insertion @a\n";
 	} elsif ( $c eq 'Pc' ) {
-		my $color = $a[0];
-		$a[1] eq '=' or die;
-		my $temperature = $a[2];
-		print "$_ temperature $color = $temperature\n";
+		print "$_ contrast @a\n";
 	} elsif ( $c eq 'Pl' ) {
-		$a[1] eq '=' or die;
-		print "$_ brightnes? $a[0] = $a[2]\n";
+		print "$_ luminosity @a\n";
 	} elsif ( $c eq 'Ps' ) {
-		$a[0] eq 'k' or die;
-		$a[1] eq '=' or die;
-		print "$_ qualityK $a[0] = $a[2]\n";
+		print "$_ speed @a\n";
 	} elsif ( $c eq 'Pr' ) {
-		print "$_ improve (not in cups)\n";
+		print "$_ ribbon $a[0]\n";
 	} elsif ( $c eq 'Ss' ) {
-		print "$_ encoding download",dump(@a),"\n";
-	} elsif ( $c eq 'Sv' ) {
-		print "$_ even page on duplex printing\n";
+		print "$_ sequence start\n";
+	} elsif ( $c eq 'Se' ) {
+		print "$_ sequence end\n";
 	} elsif ( $c eq 'Sr' ) {
-		print "$_ odd page\n";
-	} elsif ( $c eq 'Db' ) { # XXX not in cups
+		print "$_ sequence recto - card side\n";
+	} elsif ( $c eq 'Sv' ) {
+		print "$_ sequence verso - back side\n";
+	} elsif ( $c eq 'Db' ) {
 		my ( $color, $two, $data ) = @a;
 		print "$c;$color;$two;... bitmap\n";
 		$two eq '2' or die '2';
@@ -90,10 +78,6 @@ while(<>) {
 		my $h = int( $len / 128 );
 		save_pbm $path, $w, $h, $data;
 
-	} elsif ( $c eq 'Se' ) {
-		my $zero = <>;
-		print "$_ slurping zero bytes at end ",dump($zero),"\n";
-		exit 0;
 	} else {
 		print "FIXME: $_\n";
 	}
