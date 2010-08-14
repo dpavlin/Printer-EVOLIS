@@ -81,6 +81,10 @@ while(<>) {
 		my $h = int( $len / 128 );
 		save_pbm $path, $w, $h, $data;
 
+	} elsif ( $c eq 'Se' ) {
+		my $zero = <>;
+		print "Se - slurping zero bytes at end ",dump($zero);
+		exit 0;
 	} else {
 		warn "UNKNOWN: $c ", dump(@a);
 	}
