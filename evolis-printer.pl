@@ -54,6 +54,8 @@ while(<>) {
 		}
 		$len == length $comp or warn "wrong length $len != ", length $comp;
 
+		die "compression not supported" unless $color =~ m/[ko]/;
+
 		my $data;
 		my $i = 0;
 		while ( $i < length $comp ) {
