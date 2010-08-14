@@ -4,6 +4,8 @@ use warnings;
 use strict;
 use autodie;
 
+my $card_svg = 'card/ffzg-2010.svg';
+
 my ($nr,$ime,$prezime) = ( qw/
 200900000042
 Dobrica
@@ -28,7 +30,7 @@ foreach my $existing ( glob $out . '*' ) {
 	unlink $existing;
 }
 
-open(my $in,     '<', 'template.svg');
+open(my $in,     '<', $card_svg);
 open(my $print,  '>', "$out.print.svg");
 open(my $screen, '>', "$out.screen.svg");
 
@@ -55,6 +57,21 @@ while(<$in>) {
 close($in);
 close($print);
 close($screen);
+
+open(my $inkscape, '|-', 'inkscape --shell --without-gui');
+
+sub inkscape_export {
+	my $part = shift;
+	print $inkscape "$out.print.svg --export-area-page --export-pdf $out.$part.pdf --export-id $part\n";
+	print $inkscape "$out.screen.svg --export-png $out.png --export-dpi 300";
+}
+
+inkscape_export 'print-front';
+inkscape_export 'print-back';
+
+close($inkscape);
+
+__END__
 
 #system "inkscape --file $out.print.svg  --export-pdf $out.pdf";
 
