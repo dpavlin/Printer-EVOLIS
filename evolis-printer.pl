@@ -36,6 +36,9 @@ while(<>) {
 		$a[1] eq '=' or die;
 		my $temperature = $a[2];
 		print "$_ temperature $color = $temperature\n";
+	} elsif ( $c eq 'Pl' ) {
+		$a[1] eq '=' or die;
+		print "$_ brightnes? $a[0] = $a[2]\n";
 	} elsif ( $c eq 'Pr' ) {
 		print "$_ improve (not in cups)\n";
 	} elsif ( $c eq 'Ss' ) {
