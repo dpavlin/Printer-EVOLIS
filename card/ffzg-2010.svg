@@ -105,7 +105,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="offset"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true"
      transform="translate(0,-0.650002)">
     <g
@@ -178,7 +178,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="back"
-     style="display:none"
+     style="display:inline"
      transform="translate(0,-0.650002)">
     <text
        xml:space="preserve"
