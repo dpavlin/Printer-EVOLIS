@@ -47,36 +47,33 @@ while(<>) {
 		save_pbm $path, 648, 1015, $data;	# FIXME 1016?
 	} elsif ( $c eq 'Dbc' ) { # XXX not in cups
 		my ( $color, $line, $len, $comp ) = @a;
-		print "$c;$color;$line;$len;... FIXME bitmap - compressed?\n";
+		print "$c;$color;$line;$len;... download bitmap compressed\n";
 		while ( $len > length($comp) ) {
 			warn "# slurp more ",length($comp), " < $len\n";
 			$comp .= <>;
 		}
 		$len == length $comp or warn "wrong length $len != ", length $comp;
 
-		my $w = 648 / 2;
-
-=for non-working
-
 		my $data;
-
 		my $i = 0;
 		while ( $i < length $comp ) {
-			my $len = ord(substr($comp,$i,4));
-			$i += 1;
-			warn "$i comp $len\n";
-			$data .= substr($comp,$i,$len);
-			$data .= "\x00" x ( $w - $len );
-			$i += $len;
+			my $first = substr($comp,$i++,1);
+			if ( $first eq "\x00" ) {
+				$data .= "\x00" x 81;
+			} elsif ( $first eq "\xFF" ) {
+				$data .= "\xFF" x 81;
+			} else {
+				my $len = ord $first;
+				$data .= substr($comp,$i,$len);
+				my $padding = 81 - $len;
+warn "# $len $padding\n";
+				$data .= "\x00" x $padding;
+				$i += $len;
+			}
 		}
 
-=cut
-
-		my $data = $comp;
-
 		my $path = "$name-Dbc-$color-$page.pbm"; $page++;
-		my $h = int( $len / 128 );
-		save_pbm $path, $w, $h, $data;
+		save_pbm $path, 648, 1015, $data;
 
 	} else {
 		print "FIXME: $_\n";
