@@ -38,19 +38,21 @@ while(<>) {
 		print "$_ temperature $color = $temperature\n";
 	} elsif ( $c eq 'Pr' ) {
 		print "$_ improve (not in cups)\n";
+	} elsif ( $c eq 'Ss' ) {
+		print "$_ encoding download",dump(@a),"\n";
 	} elsif ( $c eq 'Sv' ) {
 		print "$_ even page on duplex printing\n";
-	} elsif ( $c eq 'Ss' ) {
-		print "$_ encoding download",dump(@a),$/;
+	} elsif ( $c eq 'Sr' ) {
+		print "$_ odd page\n";
 	} elsif ( $c eq 'Db' ) { # XXX not in cups
-		print substr($_,0,40), " bitmap\n";
 		my ( $color, $two, $data ) = @a;
+		print "$c;$color;$two;... bitmap\n";
 		$two eq '2' or die '2';
 		my $path = "$name-Db-$color-$page.pbm"; $page++;
 		save_pbm $path, 648, 1015, $data;	# FIXME 1016?
 	} elsif ( $c eq 'Dbc' ) { # XXX not in cups
 		my ( $color, $line, $len, $comp ) = @a;
-		print substr($_,0,40), " FIXME bitmap - compressed?\n";
+		print "$c;$color;$line;$len;... FIXME bitmap - compressed?\n";
 		while ( $len > length($comp) ) {
 			warn "# slurp more ",length($comp), " < $len\n";
 			$comp .= <>;
@@ -83,7 +85,7 @@ while(<>) {
 
 	} elsif ( $c eq 'Se' ) {
 		my $zero = <>;
-		print "$_ slurping zero bytes at end ",dump($zero),$/;
+		print "$_ slurping zero bytes at end ",dump($zero),"\n";
 		exit 0;
 	} else {
 		print "FIXME: $_\n";
