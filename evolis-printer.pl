@@ -17,6 +17,8 @@ local $/ = "\r";
 
 my $page = 1;
 
+my $name = $ARGV[0] || 'page';
+
 sub save_pbm;
 
 while(<>) {
@@ -42,7 +44,7 @@ while(<>) {
 	} elsif ( $c eq 'Db' ) { # XXX not in cups
 		my ( $color, $two, $data ) = @a;
 		$two eq '2' or die '2';
-		my $path = "page-Db-$color-$page.pbm";
+		my $path = "$name-Db-$color-$page.pbm";
 		$page++;
 		save_pbm $path, 648, 1015, $data;	# FIXME 1016?
 	} elsif ( $c eq 'Dbc' ) { # XXX not in cups
@@ -73,7 +75,7 @@ while(<>) {
 
 		my $data = $comp;
 
-		my $path = "page-Dbc-$color-$page.pbm";
+		my $path = "$name-Dbc-$color-$page.pbm";
 		$page++;
 
 		my $h = int( $len / 128 );
