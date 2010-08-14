@@ -50,7 +50,7 @@ while(<>) {
 		print "$c;$color;$line;$len;... download bitmap compressed\n";
 		while ( $len > length($comp) ) {
 			warn "# slurp more ",length($comp), " < $len\n";
-			$comp .= <>;
+			$comp .= $/ . <>;
 		}
 		$len == length $comp or warn "wrong length $len != ", length $comp;
 
