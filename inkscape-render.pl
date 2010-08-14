@@ -68,6 +68,13 @@ print $inkscape "$out.svg --export-png $out.png --export-dpi 300\n";
 
 close($inkscape);
 
+foreach my $pdf ( glob "$out*.pdf" ) {
+	my $pbm = $pdf;
+	$pbm =~ s/pdf$/pbm/;
+	warn "# rendering $pdf => $pbm using ghostscript\n";
+	system "gs -dNOPAUSE -dBATCH -q -r300x300 -dDEVICEWIDTHPOINTS=243 -dDEVICEHEIGHTPOINTS=155 -sDEVICE=pbmraw -sOutputFile=$pbm -f $pdf";
+}
+
 __END__
 
 #system "inkscape --file $out.print.svg  --export-pdf $out.pdf";
