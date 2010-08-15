@@ -7,6 +7,7 @@ use POSIX;
 use Data::Dump qw(dump);
 
 my $dev = '/dev/usb/lp0';
+my $debug = 0;
 
 sysopen(my $parallel, $dev, O_RDWR | O_EXCL) || die "$dev: $!";
 
@@ -17,14 +18,14 @@ while(<STDIN>) {
 	
 	my $send = "\e$_\r";
 	foreach my $byte ( split(//,$send) ) {
-		warn "#>> ",dump($byte),$/;
+		warn "#>> ",dump($byte),$/ if $debug;
 		syswrite $parallel, $byte, 1;
 	}
 	my $response;
 	my $byte;
 	while( sysread $parallel, $byte, 1 ) {
 		$response .= $byte;
-		warn "#<< ",dump($byte),$/;
+		warn "#<< ",dump($byte),$/ if $debug;
 	}
 	print "<answer ",dump($response),"\ncommand> ";
 }
