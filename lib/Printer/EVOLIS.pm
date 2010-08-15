@@ -54,6 +54,12 @@ two-sided card from pbm files.
 Simulator for EVOLIS printer commands which is useful for development.
 It creates one pbm file per page printed.
 
+=head2 scripts/evolis-command.pl
+
+Command-line interface to send commands to printer and receive responses.
+Supports readline for editing and history.
+Requires local parallel port connection, probably to USB parallel device.
+
 =head1 EXAMPLE
 
 Following is simple walk-through from svg image in Inkscape to
