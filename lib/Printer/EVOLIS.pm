@@ -27,7 +27,7 @@ front and back pages separatly.
 
 Current toolset sonsists of following scripts:
 
-=head2 scripts/inkscape-render card/template.svg 201008159999 Ime Prezime
+=head2 scripts/inkscape-render.pl card/template.svg 201008159999 Name Surname
 
 generate pbm files from Inkscape SVG template in C<card/>
 
@@ -35,8 +35,15 @@ generate pbm files from Inkscape SVG template in C<card/>
 
 provides driver which generates printer commands
 
-=head2 scripts/evolis-simulator.pl evolis.commands
+=head2 scripts/evolis-simulator.pl evolis
 
 provides simulator for EVOLIS printer which is useful for development
+
+=head1 EXAMPLE
+
+  ./scripts/inkscape-render.pl card/ffzg-2010.svg 201008159999 Ime Prezime
+  ./scripts/evolis-driver.pl out/201008159999.front.pbm out/201008159999.back.pbm > evolis
+  ./scripts/evolis-simulator.pl evolis
+  qiv evolis*.pbm
 
 =cut

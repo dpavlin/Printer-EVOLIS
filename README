@@ -17,9 +17,16 @@ DESCRIPTION
 SCRIPTS
     Current toolset sonsists of following scripts:
 
-  scripts/evolis-simulator.pl evolis.commands
-    provides simulator for EVOLIS printer which is useful for development
+  scripts/inkscape-render.pl card/template.svg 201008159999 Name Surname
+    generate pbm files from Inkscape SVG template in `card/'
 
   scripts/evolis-driver.pl front.pbm back.pbm > evolis.commands
     provides driver which generates printer commands
+
+  scripts/evolis-simulator.pl evolis
+    provides simulator for EVOLIS printer which is useful for development
+
+EXAMPLE
+      ./scripts/inkscape-render.pl card/ffzg-2010.svg 201008159999 Ime Prezime
+      ./scripts/evolis-driver.pl out/201008159999.front.pbm out/201008159999.back.pbm > evolis
 
