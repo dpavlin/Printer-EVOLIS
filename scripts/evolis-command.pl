@@ -7,7 +7,7 @@ use POSIX;
 use Data::Dump qw(dump);
 
 my $dev = '/dev/usb/lp0';
-my $debug = 0;
+my $debug = 1;
 
 my $parallel;
 
@@ -29,6 +29,7 @@ while(<STDIN>) {
 	my $response;
 	my $byte;
 	while( sysread $parallel, $byte, 1 ) {
+		last if $byte eq "\x00";
 		$response .= $byte;
 		warn "#<< ",dump($byte),$/ if $debug;
 	}
