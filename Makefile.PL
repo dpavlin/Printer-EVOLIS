@@ -6,7 +6,6 @@ author   q{Dobrica Pavlinusic <dpavlin@rot13.org>};
 license  'perl';
 
 requires 'Data::Dump';
-requires 'Device::ParallelPort';
 
 build_requires 'Test::More';
 
