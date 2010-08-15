@@ -6,7 +6,10 @@ author   q{Dobrica Pavlinusic <dpavlin@rot13.org>};
 license  'perl';
 
 requires 'Data::Dump';
+
+# evolis-command.pl
 requires 'Time::HiRes';
+requires 'Term::ReadLine';
 
 build_requires 'Test::More';
 

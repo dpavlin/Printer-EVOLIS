@@ -7,6 +7,7 @@ use POSIX;
 use Data::Dump qw(dump);
 use Time::HiRes;
 use Getopt::Long;
+use Term::ReadLine;
 
 my $port = '/dev/usb/lp0';
 my $debug = 0;
@@ -21,10 +22,12 @@ warn "# port $port debug $debug\n";
 my $parallel;
 
 $|=1;
-print "command> ";
-while(<STDIN>) {
-	chomp;
 
+my $term = Term::ReadLine->new('EVOLIS');
+my $OUT = $term->OUT || \*STDOUT;
+
+while ( defined ( $_ = $term->readline('command> ')) ) {
+	chomp;
 	my $send = "\e$_\r";
 
 	# XXX we need to reopen parallel port for each command
@@ -49,7 +52,9 @@ while(<STDIN>) {
 	}
 	close($parallel);
 
-	print "<answer ",dump($response),"\ncommand> ";
+	$term->addhistory($_) if $response;
+
+	print $OUT "<answer ",dump($response),"\n";
 
 }
 
