@@ -13,15 +13,22 @@ our $VERSION = '0.01';
 
 =head1 DESCRIPTION
 
-This is experimental support for EVOLIS Dualys 3 printer with black ribbon (K) to provide
-pixel-exact driver with support for two-side printing.
+This is experimental support for EVOLIS Dualys 3 printer with black ribbon (K)
+to provide pixel-exact driver with support for two-side printing.
 
-Existing cups driver available at
+Existing cups driver is available at
 
 L<http://www.evolis.com/eng/Drivers-Support/Product-support/Dualys-3>
 
-does work, but I haven't been able to make it print duplex on cards, especially when generating
-front and back pages separatly.
+but I haven't been able to make it print on both sides of cards,
+partly because using dumplex option in cups seems to segfault GhostScript
+and/or C<rastertoevolis> cups filter depending on combination of duplex
+options.
+
+I also needed pixel perfect transfer to printer, and cups
+bitmap format is always in color, leaving final pixel modifications down
+to cups filter which always produced differences between file sent to
+printer and perfect black and white rendition of it.
 
 =head1 SCRIPTS
 
