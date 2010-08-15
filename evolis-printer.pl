@@ -68,7 +68,7 @@ while(<>) {
 				my $len = ord $first;
 				$data .= substr($comp,$i,$len);
 				my $padding = 81 - $len;
-warn "# $len $padding\n";
+#warn "# $len + $padding\n";
 				$data .= "\x00" x $padding;
 				$i += $len;
 			}
@@ -77,6 +77,8 @@ warn "# $len $padding\n";
 		my $path = "$name-Dbc-$color-$page.pbm"; $page++;
 		save_pbm $path, 648, 1015, $data;
 
+	} elsif ( $c eq 'Mr' ) {
+		print "$_ motor ribbon @a\n";
 	} else {
 		print "FIXME: $_\n";
 	}
