@@ -42,7 +42,7 @@ while(<>) {
 	} elsif ( $c eq 'Db' ) {
 		my ( $color, $two, $data ) = @a;
 		print "$c;$color;$two;... bitmap\n";
-		$two eq '2' or die '2';
+		$two eq '2' or die 'only 2 colors supported';
 		my $path = "$name-Db-$color-$page.pbm"; $page++;
 		save_pbm $path, 648, 1015, $data;	# FIXME 1016?
 	} elsif ( $c eq 'Dbc' ) { # XXX not in cups
