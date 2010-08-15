@@ -4,15 +4,11 @@ use warnings;
 use strict;
 use autodie;
 
-my $card_svg = 'card/ffzg-2010.svg';
+die "unsage: $0 card/template.svg 201008159999 Ime Prezime\n" unless @ARGV;
 
-warn "# card template: $card_svg\n";
+my ($card_svg,$nr,$ime,$prezime) = @ARGV;
 
-my ($nr,$ime,$prezime) = ( qw/
-200900000042
-Dobrica
-Pavlinušić
-/ );
+warn "# svg: $card_svg nr: $nr $ime $prezime\n";
 
 my $mapping = {
 '200908109999' => $nr,
