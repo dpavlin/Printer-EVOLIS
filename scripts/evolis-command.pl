@@ -5,6 +5,7 @@ use strict;
 
 use POSIX;
 use Data::Dump qw(dump);
+use Time::HiRes;
 
 my $dev = '/dev/usb/lp0';
 my $debug = 1;
@@ -26,12 +27,16 @@ while(<STDIN>) {
 		syswrite $parallel, $byte, 1;
 	}
 
+	close($parallel);
+	sysopen( $parallel, $dev, O_RDWR | O_EXCL) || die "$dev: $!";
+
 	my $response;
+	while ( ! sysread $parallel, $response, 1 ) { sleep 0.1 }; # read first char
 	my $byte;
 	while( sysread $parallel, $byte, 1 ) {
+		warn "#<< ",dump($byte),$/ if $debug;
 		last if $byte eq "\x00";
 		$response .= $byte;
-		warn "#<< ",dump($byte),$/ if $debug;
 	}
 	close($parallel);
 
