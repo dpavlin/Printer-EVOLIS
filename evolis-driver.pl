@@ -1,50 +1,58 @@
+#!/usr/bin/perl
 
-my $color = 'k';
-# k = black
-printf "\x1BPr;$color\r"
+use warnings;
+use strict;
 
-my $feeder = 'F';
+my ( $front, $back ) = @ARGV;
+die "usage: $0 front.pbm back.pbm\n" unless $front;
+
+sub read_pbm;
+
+sub cmd {
+	warn "# @_\n";
+	print "\x1B",$_[0],"\r";
+}
+
+cmd 'Pr;k' => 'ribbon: black';
+
 # F = Feeder
 # M = Manual
 # B = Auto
+cmd 'Pmi;F;s' => 'mode insertion: F';
 
-print "\x1BPmi;$feeder;s\r";
-
-my $temperature = 10;
-print "\x1BPc;$color;=;$temperature\r"
-
-# improve output FIXME not used by cups
-print "\x1BPr;k\r";
+cmd 'Pc;k;=;10' => 'contrast k = 10';
 
 # FIXME ? only implemented in windows
-print "\x1BPdt;DU\r";
-print "\x1BMr;s\r";
-print "\x1BPpws;1281732635\r";
+#cmd 'Pdt;DU';
+#cmd 'Mr;s';
+#cmd 'Ppws;1281732635';
 
-# FIXME load card into printer
-print "\x1BSs\r";
-print "\x1BSr\r";
+cmd 'Ss' => 'sequence start';
 
-my $line = 2;
-my $command_size = 11682
-print "\x1BDbc;k;2;11682;"; # bitmap data
-print "\r";
+cmd 'Sr' => 'front side';
 
-# even page on two side-printing
-print "\x1BSv\r";
+my $data = read_pbm $front;
+cmd 'Db;k;2;' . $data => 'download front';
 
-print "\x1BPc;k;=;10\r";
+cmd 'Sv' => 'back side';
 
-print "\x1BDbc;k;2;31744;"; # bitmap data
-print "\r";
+cmd 'Pc;k;=;10' => 'contrast k = 10';
 
-# print "\033Ste\015"; # keep card after encoding
-print "\x1BSe\r"; # eject card
+$data = read_pbm $back;
+cmd 'Db;k;2;' . $data => 'download back';
+
+cmd 'Se' => 'sequence end';
 print "\x00" x 64; # FIXME some padding?
 
-sub encoding {
-my $data = "1234567890"; # data for track
-print "\033Ss\015", $data;
-print "\033Smw\015"; # write?
+
+sub read_pbm {
+	my $path = shift;
+	open(my $pbm, "pnmflip -rotate270 $path |");
+	my $p4 = <$pbm>; chomp $p4;
+	die "no P4 header in [$p4] from $path" unless $p4 eq 'P4';
+	my $size = <$pbm>; chomp $size;
+	local $/ = undef;
+	my $data = <$pbm>;
+	warn "# $path $size ", length($data), " bytes\n";
+	return $data;
 }
-	
