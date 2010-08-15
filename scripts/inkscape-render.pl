@@ -52,6 +52,8 @@ sub inkscape_export {
 
 	my $shell = "$out.svg --export-area-page --export-id $part";
 
+	$part =~ s/print-//; # FIXME change svg files
+
 	print $inkscape "$shell --export-pdf $out.$part.pdf\n";
 	print $inkscape "$shell --export-png $out.$part.png --export-dpi 150\n";
 }
