@@ -23,12 +23,16 @@ L<http://www.evolis.com/eng/Drivers-Support/Product-support/Dualys-3>
 does work, but I haven't been able to make it print duplex on cards, especially when generating
 front and back pages separatly.
 
-=head2 Printer simulator
+=head1 SCRIPTS
 
-C<evolis-printer.pl> provides simulator for EVOLIS printer which is useful for development
+Current toolset sonsists of following scripts:
 
-=head2 Printer driver
+=head2 scripts/evolis-driver.pl front.pbm back.pbm > evolis.commands
 
-C<evolis-driver.pl> provides driver which generates printer commands
+provides driver which generates printer commands
+
+=head2 scripts/evolis-simulator.pl evolis.commands
+
+provides simulator for EVOLIS printer which is useful for development
 
 =cut

@@ -14,10 +14,12 @@ DESCRIPTION
     does work, but I haven't been able to make it print duplex on cards,
     especially when generating front and back pages separatly.
 
-  Printer simulator
-    `evolis-printer.pl' provides simulator for EVOLIS printer which is
-    useful for development
+SCRIPTS
+    Current toolset sonsists of following scripts:
 
-  Printer driver
-    `evolis-driver.pl' provides driver which generates printer commands
+  scripts/evolis-simulator.pl evolis.commands
+    provides simulator for EVOLIS printer which is useful for development
+
+  scripts/evolis-driver.pl front.pbm back.pbm > evolis.commands
+    provides driver which generates printer commands
 
