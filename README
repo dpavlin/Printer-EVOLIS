@@ -29,4 +29,6 @@ SCRIPTS
 EXAMPLE
       ./scripts/inkscape-render.pl card/ffzg-2010.svg 201008159999 Ime Prezime
       ./scripts/evolis-driver.pl out/201008159999.front.pbm out/201008159999.back.pbm > evolis
+      ./scripts/evolis-simulator.pl evolis
+      qiv evolis*.pbm
 
