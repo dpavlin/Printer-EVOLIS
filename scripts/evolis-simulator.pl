@@ -7,15 +7,32 @@ use strict;
 
 use Data::Dump qw(dump);
 
+die "usage: $0 evolis.commands\n" unless @ARGV;
+my $name = shift @ARGV;
+
 local $/ = "\r";
 
 my $page = 1;
 
-my $name = $ARGV[0] || 'page';
-
 sub save_pbm;
 
-while(<>) {
+open(my $e, '<', $name) || die "$name: $!";
+sub bitmap {
+	my ($data,$len) = @_;
+warn "# tell ",tell($e),"\n";
+	$data =~ s/D.+;\d+;//;
+	$data =~ s/\r$//;
+	my $l = length $data;
+	warn "# bitmap $l $len\n";
+	return $data if length $data == $len;
+	my $rest;
+	my $l = $len - length $data;
+	read $e, $rest, $l;
+	warn "# slurp $l got ",length($rest);
+	return $data . $rest;
+}
+
+while(<$e>) {
 	die "no escape at beginning",dump($_) unless s/^(\x00*)\x1B//;
 	warn "WARNING: ", length($1), " extra nulls before ESC\n" if $1;
 	my @a = split(/;/,$_);
@@ -40,19 +57,15 @@ while(<>) {
 	} elsif ( $c eq 'Sv' ) {
 		print "$_ sequence verso - back side\n";
 	} elsif ( $c eq 'Db' ) {
-		my ( $color, $two, $data ) = @a;
-		print "$c;$color;$two;... bitmap\n";
+		my ( $color, $two ) = @a;
+		print "$c;$color;$two;... bitmap ",length($_), " bytes\n";
 		$two eq '2' or die 'only 2 colors supported';
 		my $path = "$name-Db-$color-$page.pbm"; $page++;
-		save_pbm $path, 648, 1015, $data;	# FIXME 1016?
+		save_pbm $path, 648, 1016, bitmap( $_, 648 * 1016 / 8 );
 	} elsif ( $c eq 'Dbc' ) { # XXX not in cups
-		my ( $color, $line, $len, $comp ) = @a;
+		my ( $color, $line, $len ) = @a;
 		print "$c;$color;$line;$len;... download bitmap compressed\n";
-		while ( $len > length($comp) ) {
-			warn "# slurp more ",length($comp), " < $len\n";
-			$comp .= <>;
-		}
-		$len == length $comp or warn "wrong length $len != ", length $comp;
+		my $comp = bitmap( $_, $len );
 
 		die "compression not supported" unless $color =~ m/[ko]/;
 
@@ -75,7 +88,7 @@ while(<>) {
 		}
 
 		my $path = "$name-Dbc-$color-$page.pbm"; $page++;
-		save_pbm $path, 648, 1015, $data;
+		save_pbm $path, 648, 1016, $data;
 
 	} elsif ( $c eq 'Mr' ) {
 		print "$_ motor ribbon @a\n";
