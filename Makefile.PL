@@ -6,6 +6,7 @@ author   q{Dobrica Pavlinusic <dpavlin@rot13.org>};
 license  'perl';
 
 requires 'Data::Dump';
+requires 'Time::HiRes';
 
 build_requires 'Test::More';
 

@@ -6,9 +6,17 @@ use strict;
 use POSIX;
 use Data::Dump qw(dump);
 use Time::HiRes;
+use Getopt::Long;
 
-my $dev = '/dev/usb/lp0';
-my $debug = 1;
+my $port = '/dev/usb/lp0';
+my $debug = 0;
+
+GetOptions(
+	'debug+' => \$debug,
+	'port=s' => \$port,
+) || die $!;
+
+warn "# port $port debug $debug\n";
 
 my $parallel;
 
@@ -20,7 +28,7 @@ while(<STDIN>) {
 	my $send = "\e$_\r";
 
 	# XXX we need to reopen parallel port for each command
-	sysopen( my $parallel, $dev, O_RDWR | O_EXCL) || die "$dev: $!";
+	sysopen( $parallel, $port, O_RDWR | O_EXCL) || die "$port: $!";
 
 	foreach my $byte ( split(//,$send) ) {
 		warn "#>> ",dump($byte),$/ if $debug;
@@ -28,10 +36,11 @@ while(<STDIN>) {
 	}
 
 	close($parallel);
-	sysopen( $parallel, $dev, O_RDWR | O_EXCL) || die "$dev: $!";
+	# XXX and between send and receive
+	sysopen( $parallel, $port, O_RDWR | O_EXCL) || die "$port: $!";
 
 	my $response;
-	while ( ! sysread $parallel, $response, 1 ) { sleep 0.1 }; # read first char
+	while ( ! sysread $parallel, $response, 1 ) { sleep 0.1 }; # XXX wait for 1st char
 	my $byte;
 	while( sysread $parallel, $byte, 1 ) {
 		warn "#<< ",dump($byte),$/ if $debug;
