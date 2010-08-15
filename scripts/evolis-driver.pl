@@ -54,5 +54,9 @@ sub read_pbm {
 	local $/ = undef;
 	my $data = <$pbm>;
 	warn "# $path $size ", length($data), " bytes\n";
+	if ( my $padding = ( 648 * 1016 / 8 - length($data) ) ) {
+		warn "# adding $padding zero bytes padding\n";
+		$data .= "\x00" x $padding;
+	}
 	return $data;
 }
