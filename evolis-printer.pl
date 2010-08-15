@@ -18,9 +18,9 @@ sub save_pbm;
 while(<>) {
 	die "no escape at beginning",dump($_) unless s/^(\x00*)\x1B//;
 	warn "WARNING: ", length($1), " extra nulls before ESC\n" if $1;
-	chomp;
 	my @a = split(/;/,$_);
 	my $c = shift @a;
+	chomp $c;
 	if ( $c eq 'Pmi' ) {
 		print "$_ mode insertion @a\n";
 	} elsif ( $c eq 'Pc' ) {
@@ -50,7 +50,7 @@ while(<>) {
 		print "$c;$color;$line;$len;... download bitmap compressed\n";
 		while ( $len > length($comp) ) {
 			warn "# slurp more ",length($comp), " < $len\n";
-			$comp .= $/ . <>;
+			$comp .= <>;
 		}
 		$len == length $comp or warn "wrong length $len != ", length $comp;
 
