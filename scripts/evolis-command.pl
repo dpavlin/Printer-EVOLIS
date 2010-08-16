@@ -21,14 +21,30 @@ GetOptions(
 warn "# port $port debug $debug\n";
 
 my $parallel = Printer::EVOLIS::Parallel->new( $port );
+sub cmd { $parallel->command( @_ ) }
 
 my $term = Term::ReadLine->new('EVOLIS');
 my $OUT = $term->OUT || \*STDOUT;
 
-select($OUT); $|=1;
+#select($OUT); $|=1;
+
+
+
+my @help;
+{
+	open(my $fh, '<', 'docs/commands.txt');
+	@help = <$fh>;
+	warn "# help for ", $#help + 1, " comands, grep with /search_string\n";
+}
 
 while ( defined ( $_ = $term->readline('command> ')) ) {
 	chomp;
+
+	if ( m{^/(.*)} ) {
+		print $OUT $_ foreach grep { m{$1}i } @help;
+		next;
+	}
+
 	my $send = "\e$_\r";
 
 	my $response = $parallel->command( $send );
