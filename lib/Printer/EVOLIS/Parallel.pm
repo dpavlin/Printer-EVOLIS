@@ -6,7 +6,7 @@ use strict;
 use POSIX;
 use Data::Dump qw(dump);
 
-my $debug = 0;
+our $debug = 0;
 
 =head1 NAME
 
