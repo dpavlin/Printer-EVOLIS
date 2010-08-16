@@ -25,6 +25,7 @@ warn "# tell ",tell($e),"\n";
 	my $l = length $data;
 	warn "# bitmap $l $len\n";
 	return $data if length $data == $len;
+	$data .= "\r";
 	my $rest;
 	my $l = $len - length $data;
 	read $e, $rest, $l;
