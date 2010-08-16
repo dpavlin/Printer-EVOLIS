@@ -21,7 +21,8 @@ GetOptions(
 warn "# port $port debug $debug\n";
 
 my $parallel = Printer::EVOLIS::Parallel->new( $port );
-sub cmd { $parallel->command( @_ ) }
+$Printer::EVOLIS::Parallel::debug = $debug;
+sub cmd { $parallel->command( "\e$_[0]\r" ) }
 
 my $term = Term::ReadLine->new('EVOLIS');
 my $OUT = $term->OUT || \*STDOUT;
@@ -36,6 +37,13 @@ my @help;
 	@help = <$fh>;
 	warn "# help for ", $#help + 1, " comands, grep with /search_string\n";
 }
+
+print $OUT "Printer model ", cmd('Rtp'),"\n";
+print $OUT "Printer s/no  ", cmd('Rsn'),"\n";
+print $OUT "Kit head no   ", cmd('Rkn'),"\n";
+print $OUT "Firmware      ", cmd('Rfv'),"\n";
+print $OUT "Mac address   ", cmd('Rmac'),"\n";
+print $OUT "IP address    ", cmd('Rip'),"\n";
 
 while ( defined ( $_ = $term->readline('command> ')) ) {
 	chomp;
