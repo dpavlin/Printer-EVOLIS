@@ -18,8 +18,9 @@ while(<$html>) {
 	if ( m{<b>(\w+)&nbsp;</b><br>} ) {
 		my $command = $1;
 		my $param = <$html>;
+		next if $param =~ m{Page #};
 		my $description = <$html>;
-		print "$command\t", strip_html($param) , "\t", strip_html($description), "\n";
+		printf "%-4s %-15s %s\n", $command, strip_html($param), strip_html($description);
 	}
 }
 
