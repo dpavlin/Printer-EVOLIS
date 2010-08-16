@@ -73,7 +73,7 @@ foreach my $pdf ( glob "$out*.pdf" ) {
 	system "gs -dNOPAUSE -dBATCH -q -r300x300 -dDEVICEWIDTHPOINTS=243 -dDEVICEHEIGHTPOINTS=155 -sDEVICE=pbmraw -sOutputFile=$pbm -f $pdf";
 }
 
-system "pdftk $out.print-front.pdf $out.print-back.pdf cat output $out.print-duplex.pdf";
+system "pdftk $out.front.pdf $out.back.pdf cat output $out.duplex.pdf";
 
 __END__
 
