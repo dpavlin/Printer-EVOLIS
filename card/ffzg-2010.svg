@@ -49,6 +49,20 @@
        inkscape:vp_z="301.18109 : 95.669289 : 1"
        inkscape:persp3d-origin="150.59055 : 63.779526 : 1"
        id="perspective3040" />
+    <inkscape:perspective
+       id="perspective2966"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2991"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -61,7 +75,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.1069555"
-     inkscape:cx="109.59281"
+     inkscape:cx="133.03982"
      inkscape:cy="97.441175"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
@@ -180,68 +194,102 @@
      inkscape:label="back"
      style="display:inline"
      transform="translate(0,-0.650002)">
-    <text
-       xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial;-inkscape-font-specification:Arial"
-       x="151.92188"
-       y="41.623634"
+    <g
        id="print-back"
-       inkscape:label="#text2438"><tspan
-         sodipodi:role="line"
-         x="151.92188"
-         y="41.623634"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
-         id="tspan2442">KNJIŽNICA FILOZOFSKOG FAKULTETA U ZAGREBU</tspan><tspan
-         sodipodi:role="line"
-         x="151.92188"
-         y="56.623634"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
-         id="tspan2452" /><tspan
-         sodipodi:role="line"
-         x="151.92188"
-         y="71.623634"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
-         id="tspan2454">FACULTY OF HUMANITIES</tspan><tspan
-         sodipodi:role="line"
-         x="151.92188"
-         y="86.623634"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
-         id="tspan2456">AND SOCIAL SCIENCES LIBRARY</tspan><tspan
-         sodipodi:role="line"
-         x="151.92188"
-         y="101.62363"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
-         id="tspan3356">UNIVERISTY OF ZAGREB</tspan><tspan
-         sodipodi:role="line"
-         x="151.92188"
-         y="116.62363"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
-         id="tspan2862" /><tspan
-         sodipodi:role="line"
-         x="151.92188"
-         y="131.62363"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
-         id="tspan2860">Ivana Lučića 3, HR-10000</tspan><tspan
-         sodipodi:role="line"
-         x="151.92188"
-         y="146.62363"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
-         id="tspan3358" /><tspan
-         sodipodi:role="line"
-         x="151.92188"
-         y="161.62363"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
-         id="tspan3354">http://knjiznica.ffzg.hr/</tspan></text>
+       inkscape:label="#g3008">
+      <text
+         inkscape:label="#text2438"
+         id="ffzg-info"
+         y="47.623634"
+         x="151.54541"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           id="tspan2442"
+           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
+           y="47.623634"
+           x="151.54541"
+           sodipodi:role="line">KNJIŽNICA FILOZOFSKOG FAKULTETA</tspan><tspan
+           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
+           y="65.123634"
+           x="151.54541"
+           sodipodi:role="line"
+           id="tspan2879">SVEUČILIŠTE U ZAGREBU</tspan><tspan
+           id="tspan2452"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
+           y="82.623634"
+           x="151.54541"
+           sodipodi:role="line" /><tspan
+           id="tspan2456"
+           style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
+           y="95.203255"
+           x="151.54541"
+           sodipodi:role="line">FACULTY OF HUMANITIES AND SOCIAL SCIENCES LIBRARY</tspan><tspan
+           id="tspan3356"
+           style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
+           y="106.45325"
+           x="151.54541"
+           sodipodi:role="line">UNIVERISTY OF ZAGREB</tspan><tspan
+           id="tspan2862"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
+           y="117.70325"
+           x="151.54541"
+           sodipodi:role="line" /><tspan
+           id="tspan3358"
+           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
+           y="133.87363"
+           x="151.54541"
+           sodipodi:role="line">Ivana Lučića 3, HR-10000</tspan><tspan
+           id="tspan2856"
+           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Arial;-inkscape-font-specification:Arial"
+           y="151.37363"
+           x="151.54541"
+           sodipodi:role="line">http://knjiznica.ffzg.hr/</tspan></text>
+      <text
+         id="text2863"
+         y="178.7052"
+         x="179.65788"
+         style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:OCRA;-inkscape-font-specification:OCRA Bold"
+           y="178.7052"
+           x="179.65788"
+           id="tspan2865"
+           sodipodi:role="line">200908109999</tspan></text>
+      <text
+         transform="matrix(-0.01289533,-0.99991685,0.99991685,-0.01289533,0,0)"
+         id="text2861"
+         y="294.8956"
+         x="-107.89199"
+         style="font-size:4px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           style="font-size:4px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial"
+           y="294.8956"
+           x="-107.89199"
+           id="tspan2863"
+           sodipodi:role="line">©FFZG</tspan></text>
+      <text
+         id="text2863-1"
+         y="179.1852"
+         x="21.828943"
+         style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:OCRA;-inkscape-font-specification:OCRA Bold"
+           y="179.1852"
+           x="21.828943"
+           id="tspan2865-5"
+           sodipodi:role="line">login123@ffzg.hr</tspan></text>
+    </g>
   </g>
   <g
      inkscape:label="front"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline"
+     style="display:none"
      transform="translate(0,-0.650002)">
     <g
        id="print-front"
-       inkscape:label="#g2864">
+       inkscape:label="#g2864"
+       transform="translate(8,0)">
       <text
          sodipodi:linespacing="125%"
          transform="scale(0.9873415,1.0128208)"
@@ -274,16 +322,5 @@
            x="17.269848"
            sodipodi:role="line">Čitalić</tspan></text>
     </g>
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="272.07465"
-       y="187.46471"
-       id="text2856"><tspan
-         sodipodi:role="line"
-         id="tspan2858"
-         x="272.07465"
-         y="187.46471"
-         style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">15pt</tspan></text>
   </g>
 </svg>
