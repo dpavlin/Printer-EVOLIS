@@ -22,7 +22,7 @@ warn "# port $port debug $debug\n";
 
 my $parallel = Printer::EVOLIS::Parallel->new( $port );
 $Printer::EVOLIS::Parallel::debug = $debug;
-sub cmd { $parallel->command( "\e$_[0]\r" ) }
+sub cmd { $parallel->command( "\e$_[0]\r" ) . "\n"; }
 
 my $term = Term::ReadLine->new('EVOLIS');
 my $OUT = $term->OUT || \*STDOUT;
@@ -38,12 +38,21 @@ my @help;
 	warn "# help for ", $#help + 1, " comands, grep with /search_string\n";
 }
 
-print $OUT "Printer model ", cmd('Rtp'),"\n";
-print $OUT "Printer s/no  ", cmd('Rsn'),"\n";
-print $OUT "Kit head no   ", cmd('Rkn'),"\n";
-print $OUT "Firmware      ", cmd('Rfv'),"\n";
-print $OUT "Mac address   ", cmd('Rmac'),"\n";
-print $OUT "IP address    ", cmd('Rip'),"\n";
+print $OUT "Printer model ", cmd('Rtp');
+print $OUT "Printer s/no  ", cmd('Rsn');
+print $OUT "Kit head no   ", cmd('Rkn');
+print $OUT "Firmware      ", cmd('Rfv');
+print $OUT "Mac address   ", cmd('Rmac');
+print $OUT "IP address    ", cmd('Rip');
+
+print $OUT "\nCounters:\n";
+print $OUT "- printed panels: ",cmd('Rco;p');
+print $OUT "- inserted cards: ",cmd('Rco;c');
+print $OUT "- avg.clean freq: ",cmd('Rco;a');
+print $OUT "- max.clean freq: ",cmd('Rco;m');
+print $OUT "- clean number:   ",cmd('Rco;n');
+print $OUT "- this ribbon:    ",cmd('Rco;l');
+print $OUT "- $_ FIXME ",cmd("Rco;$_") foreach (qw/b e f i k r s/);
 
 while ( defined ( $_ = $term->readline('command> ')) ) {
 	chomp;
