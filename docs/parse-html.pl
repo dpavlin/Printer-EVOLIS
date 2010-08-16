@@ -10,6 +10,7 @@ sub strip_html {
 	$t =~ s{&nbsp;}{ }gs;
 	$t =~ s{(<br>|\n)+}{}gs;
 	$t =~ s{\s+$}{}gs;
+	$t =~ s{\s*;\s*}{;}gs;
 	return $t;
 }
 
