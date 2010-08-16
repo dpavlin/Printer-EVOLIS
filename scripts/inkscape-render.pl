@@ -4,14 +4,15 @@ use warnings;
 use strict;
 use autodie;
 
-die "unsage: $0 card/template.svg 201008159999 Ime Prezime\n" unless @ARGV;
+die "unsage: $0 card/template.svg 201008159999 login Ime Prezime\n" unless @ARGV;
 
-my ($card_svg,$nr,$ime,$prezime) = @ARGV;
+my ($card_svg,$nr,$login,$ime,$prezime) = @ARGV;
 
 warn "# svg: $card_svg nr: $nr $ime $prezime\n";
 
 my $mapping = {
 '200908109999' => $nr,
+'login123@ffzg.hr' => $login,
 'Knjižničarko' => $ime,
 'Čitalić' => $prezime,
 };
@@ -35,7 +36,7 @@ while(<$svg_template>) {
 
 	if ( m{($re)} ) {
 		warn "mapping $1\n";
-		s{($1)}{mapping($1)}e;
+		s{($1)}{mapping($1)}ge;
 	}
 
 	print $svg $_;
