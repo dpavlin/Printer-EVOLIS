@@ -35,6 +35,12 @@ sub new {
 
 sub command {
 	my ( $self, $send ) = @_;
+	$send = "\e$send\r" unless $send =~ m/^\e/;
+	$self->send( $send );
+}
+
+sub send {
+	my ( $self, $send ) = @_;
 
 	my $port = $self->{port};
 	die "no port $port" unless -e $port;
