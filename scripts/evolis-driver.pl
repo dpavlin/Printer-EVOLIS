@@ -9,8 +9,10 @@ die "usage: $0 front.pbm back.pbm\n" unless $front;
 sub read_pbm;
 
 sub cmd {
-	warn "# @_\n";
-	print "\x1B",$_[0],"\r";
+	my ( $cmd, $description ) = @_;
+	print "\x1B",$cmd,"\r";
+	$cmd =~ s/^(Db[\w\d;]+).+/$1_/s;
+	warn sprintf "## %-10s %s\n", $cmd, $description;
 }
 
 cmd 'Pr;k' => 'ribbon: black';
