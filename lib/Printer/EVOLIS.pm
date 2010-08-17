@@ -34,7 +34,7 @@ printer and perfect black and white rendition of it.
 
 Current toolset consists of following scripts:
 
-=head2 scripts/inkscape-render.pl card/template.svg 201008159999 Name Surname
+=head2 scripts/inkscape-render.pl card/template.svg 201008159999 login Name Surname
 
 Generate pdf files from Inkscape SVG template in C<card/> using
 C<print-front> and C<print-back> object IDs. Layers doesn't work
