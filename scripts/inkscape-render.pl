@@ -12,7 +12,7 @@ warn "# svg: $card_svg nr: $nr $ime $prezime\n";
 
 my $mapping = {
 '200908109999' => $nr,
-'login123@ffzg.hr' => $login,
+'login0123456789@ffzg.hr' => $login,
 'Knjižničarko' => $ime,
 'Čitalić' => $prezime,
 };
