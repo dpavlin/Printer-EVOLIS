@@ -1,7 +1,7 @@
-.cups
 bin/install-debian.sh
 card/ffzg-2008.svg
 card/ffzg-2010.svg
+Changes
 docs/commands.txt
 docs/parse-html.pl
 inc/Module/AutoInstall.pm
