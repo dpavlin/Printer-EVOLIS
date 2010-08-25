@@ -24,7 +24,7 @@ DESCRIPTION
 SCRIPTS
     Current toolset consists of following scripts:
 
-  scripts/inkscape-render.pl card/template.svg 201008159999 Name Surname
+  scripts/inkscape-render.pl card/template.svg 201008159999 login Name Surname
     Generate pdf files from Inkscape SVG template in `card/' using
     `print-front' and `print-back' object IDs. Layers doesn't work since we
     can't toggle visilbity easily. To print more than one object gruop them
