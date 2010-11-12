@@ -8,6 +8,8 @@ die "unsage: $0 card/template.svg 201008159999 login Ime Prezime\n" unless @ARGV
 
 my ($card_svg,$nr,$login,$ime,$prezime) = @ARGV;
 
+my $png = $ENV{PNG} || 0;
+
 warn "# svg: $card_svg nr: $nr $ime $prezime\n";
 
 my $mapping = {
@@ -56,14 +58,14 @@ sub inkscape_export {
 	$part =~ s/print-//; # FIXME change svg files
 
 	print $inkscape "$shell --export-pdf $out.$part.pdf\n";
-#	print $inkscape "$shell --export-png $out.$part.png --export-dpi 150\n";
+	print $inkscape "$shell --export-png $out.$part.png --export-dpi 150\n" if $png;
 }
 
 inkscape_export 'print-front';
 inkscape_export 'print-back';
 
 # export visible
-#print $inkscape "$out.svg --export-png $out.png --export-dpi 300\n";
+print $inkscape "$out.svg --export-png $out.png --export-dpi 300\n" if $png;
 
 close($inkscape);
 
