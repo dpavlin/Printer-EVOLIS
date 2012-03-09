@@ -76,7 +76,7 @@ foreach my $pdf ( glob "$out*.pdf" ) {
 	system "gs -dNOPAUSE -dBATCH -q -r300x300 -dDEVICEWIDTHPOINTS=243 -dDEVICEHEIGHTPOINTS=155 -sDEVICE=pbmraw -sOutputFile=$pbm -f $pdf";
 }
 
-system "pdftk $out.front.pdf $out.back.pdf cat output $out.duplex.pdf";
+system "pdftk $out.front.pdf $out.back.pdf cat output $out.duplex.pdf" if $ENV{DUPLEX};
 
 __END__
 
