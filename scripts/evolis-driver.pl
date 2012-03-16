@@ -50,15 +50,46 @@ print "\x00" x 64; # FIXME some padding?
 sub read_pbm {
 	my $path = shift;
 	open(my $pbm, "pnmflip -rotate270 $path |");
-	my $p4 = <$pbm>; chomp $p4;
-	die "no P4 header in [$p4] from $path" unless $p4 eq 'P4';
+	my $magic = <$pbm>; chomp $magic;
 	my $size = <$pbm>; chomp $size;
-	local $/ = undef;
-	my $data = <$pbm>;
-	warn "# $path $size ", length($data), " bytes\n";
-	if ( my $padding = ( 648 * 1016 / 8 - length($data) ) ) {
-		warn "# adding $padding zero bytes padding\n";
-		$data .= "\x00" x $padding;
+	my $bitmap;
+	if ( $magic eq 'P4' ) { # portable bitmap
+		local $/ = undef;
+		$bitmap = <$pbm>;
+		warn "# $path $size ", length($bitmap), " bytes\n";
+	} elsif ( $magic eq 'P6' ) { # portable pixmap
+		my $max_color = <$pbm>; chomp $max_color;
+
+		my $trashold = $max_color / 2;
+
+		local $/ = undef;
+		my $rgb = <$pbm>;
+
+		my $mask = 0x80;
+		my $byte = 0;
+
+		my $o = 0;
+		while ( $o < length($rgb) ) {
+			my $px = ord(substr($rgb,$o,1)); $o += 3;
+			$byte ^= $mask if $px < $trashold;
+			$mask >>= 1;
+			if ( ! $mask ) { 
+				$bitmap .= chr($byte);
+				$byte = 0;
+				$mask = 0x80;
+			}
+		}
+
+		warn "# $path $size ", length($bitmap), " bytes\n";
+
+	} else {
+		die "unsupported $magic format!";
 	}
-	return $data;
+
+	if ( my $padding = ( 648 * 1016 / 8 - length($bitmap) ) ) {
+		warn "# adding $padding zero bytes padding\n";
+		$bitmap .= "\x00" x $padding;
+	}
+
+	return $bitmap;
 }
