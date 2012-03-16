@@ -57,7 +57,7 @@ sub read_pbm {
 		local $/ = undef;
 		$bitmap = <$pbm>;
 		warn "# $path $size ", length($bitmap), " bytes\n";
-	} elsif ( $magic eq 'P6' ) { # portable pixmap
+	} elsif ( $magic eq 'P5' || $magic eq 'P6' ) { # portable graymap/pixmap
 		my $max_color = <$pbm>; chomp $max_color;
 
 		my $trashold = $max_color / 2;
@@ -68,9 +68,11 @@ sub read_pbm {
 		my $mask = 0x80;
 		my $byte = 0;
 
+		my $step = $magic eq 'P6' ? 3 : 1;
+
 		my $o = 0;
 		while ( $o < length($rgb) ) {
-			my $px = ord(substr($rgb,$o,1)); $o += 3;
+			my $px = ord(substr($rgb,$o,1)); $o += $step;
 			$byte ^= $mask if $px < $trashold;
 			$mask >>= 1;
 			if ( ! $mask ) { 
