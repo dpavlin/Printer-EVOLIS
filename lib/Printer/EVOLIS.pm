@@ -47,7 +47,8 @@ into pbm (monochrome) bitmaps.
 =head2 scripts/evolis-driver.pl front.pbm back.pbm > evolis.commands
 
 Provides driver which generates printer command stream to print
-two-sided card from pbm files.
+two-sided card from pbm files. Back side file is optional if you want
+to print just on front side of card.
 
 =head2 scripts/evolis-simulator.pl evolis
 

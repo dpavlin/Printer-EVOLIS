@@ -4,7 +4,7 @@ use warnings;
 use strict;
 
 my ( $front, $back ) = @ARGV;
-die "usage: $0 front.pbm back.pbm\n" unless $front;
+die "usage: $0 front.pbm [back.pbm]\n" unless $front;
 
 sub read_pbm;
 
@@ -36,12 +36,16 @@ cmd 'Sr' => 'front side';
 my $data = read_pbm $front;
 cmd 'Db;k;2;' . $data => 'download front';
 
+if ( $back ) {
+
 cmd 'Sv' => 'back side';
 
 cmd 'Pc;k;=;10' => 'contrast k = 10';
 
 $data = read_pbm $back;
 cmd 'Db;k;2;' . $data => 'download back';
+
+} # no back
 
 cmd 'Se' => 'sequence end';
 print "\x00" x 64; # FIXME some padding?
