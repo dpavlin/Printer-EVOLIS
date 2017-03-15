@@ -73,7 +73,7 @@ foreach my $pdf ( glob "$out*.pdf" ) {
 	my $pbm = $pdf;
 	$pbm =~ s/pdf$/pbm/;
 	warn "# rendering $pdf => $pbm using ghostscript\n";
-	system "gs -dNOPAUSE -dBATCH -q -r300x300 -dDEVICEWIDTHPOINTS=243 -dDEVICEHEIGHTPOINTS=155 -sDEVICE=pbmraw -sOutputFile=$pbm -f $pdf";
+	system "gs -dNOPAUSE -dBATCH -q -r300x300 -dDEVICEWIDTHPOINTS=243 -dDEVICEHEIGHTPOINTS=155 -dPDFFitPage -sDEVICE=pbmraw -sOutputFile=$pbm -f $pdf";
 }
 
 system "pdftk $out.front.pdf $out.back.pdf cat output $out.duplex.pdf" if $ENV{DUPLEX};
