@@ -52,6 +52,10 @@ sub read_pbm {
 	open(my $pbm, "pnmflip -rotate270 $path |");
 	my $magic = <$pbm>; chomp $magic;
 	my $size = <$pbm>; chomp $size;
+	my ($x_size,undef) = split(/\s/,$size,2);
+	if ( $x_size <= 640 || $x_size > 648 ) {
+		die "picture has to have 81 bytes in line line, so 641 - 648 pixels hight";
+	}
 	my $bitmap;
 	if ( $magic eq 'P4' ) { # portable bitmap
 		local $/ = undef;
