@@ -6,6 +6,7 @@ use autodie;
 
 use XML::Twig;
 use Data::Dump qw(dump);
+use utf8;
 
 die "unsage: $0 card/template.svg 201008159999 login Ime Prezime\n" unless @ARGV;
 
@@ -13,7 +14,7 @@ my ($card_svg,$nr,$login,$ime,$prezime) = @ARGV;
 
 my $png = $ENV{PNG} || 0;
 
-warn "# svg: $card_svg nr: $nr $ime $prezime\n";
+warn "# svg: $card_svg nr: $nr ime: $ime prezime: $prezime\n";
 
 my $mapping = {
 '200908109999' => $nr,
@@ -32,21 +33,21 @@ foreach my $existing ( glob $out . '*' ) {
 
 my $twig = XML::Twig->new(
 	twig_handlers => {
-		'text/tspan' => sub {
-			if ( my $replace = $mapping->{ $_->text } ) {
-				warn "# replace ", $_->text, " => $replace\n";
-				$_->set_text( $replace );
+		'tspan' => sub {
+			my $el = $_;
+			my $text = $el->text;
+			utf8::decode( $text );
+			warn "# tspan ", dump($text);
+			if ( my $replace = $mapping->{ $text } ) {
+				warn "# replace ", $text, " => $replace\n";
+#				utf8::decode( $replace );
+				$el->set_text( $replace );
 			}
 		},
 	},
 	pretty_print => 'indented',                
 );
 $twig->parsefile( $card_svg );
-
-while ( my($from,$to) = each %$mapping ) {
-	warn "# replace $from -> $to\n";
-	$twig->subs_text( qr{$from}, $to );
-}
 
 foreach my $layer ( qw( front back ) ) {
 
