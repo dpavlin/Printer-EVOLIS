@@ -48,26 +48,23 @@ while(<$svg_template>) {
 close($svg_template);
 close($svg);
 
-open(my $inkscape, '|-', 'inkscape --shell --without-gui');
-
 sub inkscape_export {
 	my $part = shift;
 
-	my $shell = "$out.svg --export-area-page --export-id $part";
+	my $actions = "file-open:$out.svg ; export-area-page ; export-id:$part ;";
 
 	$part =~ s/print-//; # FIXME change svg files
 
-	print $inkscape "$shell --export-pdf $out.$part.pdf\n";
-	print $inkscape "$shell --export-png $out.$part.png --export-dpi 150\n" if $png;
+	system qq{inkscape --actions="$actions ; export-type:pdf ; export-filename:$out.$part.pdf ; export-do ;"};
+#	print $inkscape "$actions ; export-type:png ; export-filename:$out.$part.png ; export-dpi 150 ; export-do ;" if $png;
 }
 
 inkscape_export 'print-front';
 inkscape_export 'print-back';
 
 # export visible
-print $inkscape "$out.svg --export-png $out.png --export-dpi 300\n" if $png;
+#print $inkscape "$out.svg --export-png $out.png --export-dpi 300\n" if $png;
 
-close($inkscape);
 
 foreach my $pdf ( glob "$out*.pdf" ) {
 	my $pbm = $pdf;
