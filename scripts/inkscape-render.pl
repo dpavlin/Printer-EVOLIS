@@ -8,6 +8,8 @@ die "unsage: $0 card/template.svg 201008159999 login Ime Prezime\n" unless @ARGV
 
 my ($card_svg,$nr,$login,$ime,$prezime) = @ARGV;
 
+warn "## $0 @ARGV";
+
 my $png = $ENV{PNG} || 0;
 
 warn "# svg: $card_svg nr: $nr $ime $prezime\n";
@@ -55,6 +57,7 @@ sub inkscape_export {
 
 	$part =~ s/print-//; # FIXME change svg files
 
+	warn "# inkscape_export $part";
 	system qq{inkscape --actions="$actions ; export-type:pdf ; export-filename:$out.$part.pdf ; export-do ;"};
 #	print $inkscape "$actions ; export-type:png ; export-filename:$out.$part.png ; export-dpi 150 ; export-do ;" if $png;
 }
