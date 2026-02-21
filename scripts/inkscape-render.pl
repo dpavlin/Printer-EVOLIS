@@ -53,7 +53,7 @@ close($svg);
 sub inkscape_export {
 	my $part = shift;
 
-	my $actions = "file-open:$out.svg ; export-area-page ; export-id:$part ;";
+	my $actions = "file-open:$out.svg ; export-id:$part ; export-id-only ; export-area-page ;";
 
 	$part =~ s/print-//; # FIXME change svg files
 
