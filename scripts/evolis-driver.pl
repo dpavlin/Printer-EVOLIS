@@ -37,14 +37,14 @@ my $data = read_pbm $front;
 cmd 'Db;k;2;' . $data => 'download front';
 
 if ( $back ) {
-
-cmd 'Sv' => 'back side';
-
-cmd 'Pc;k;=;10' => 'contrast k = 10';
-
-$data = read_pbm $back;
-cmd 'Db;k;2;' . $data => 'download back';
-
+	my $back_data = read_pbm $back;
+	if ( $back_data =~ /[^\0]/ ) {
+		cmd 'Sv' => 'back side';
+		cmd 'Pc;k;=;10' => 'contrast k = 10';
+		cmd 'Db;k;2;' . $back_data => 'download back';
+	} else {
+		warn "## back side is blank, skipping\n";
+	}
 } # no back
 
 cmd 'Se' => 'sequence end';
