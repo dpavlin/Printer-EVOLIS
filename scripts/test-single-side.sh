@@ -87,5 +87,8 @@ mkdir -p out
 # Test known double-sided
 test_svg "card/ffzg-2010.svg"
 
+# Test new 2026 v3 single-sided
+test_svg "card/ffzg-2026-v3-single-side.svg"
+
 # Test known single-sided (renders blank back)
 test_svg "card/ffzg-2018-old-cards.svg"
