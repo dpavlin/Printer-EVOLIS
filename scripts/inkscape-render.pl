@@ -3,10 +3,14 @@
 use warnings;
 use strict;
 use autodie;
+use utf8;
+use Encode qw(decode_utf8);
+binmode(STDOUT, ":utf8");
+binmode(STDERR, ":utf8");
 
 die "unsage: $0 card/template.svg 201008159999 login Ime Prezime\n" unless @ARGV;
 
-my ($card_svg,$nr,$login,$ime,$prezime) = @ARGV;
+my ($card_svg,$nr,$login,$ime,$prezime) = map { decode_utf8($_) } @ARGV;
 
 warn "## $0 @ARGV";
 
@@ -23,8 +27,6 @@ my $mapping = {
 
 sub mapping { $mapping->{ $_[0] } }
 
-my $re = join('|', keys %$mapping);
-
 mkdir 'out' unless -d 'out';
 my $out = 'out/' . $nr;
 
@@ -33,19 +35,24 @@ foreach my $existing ( glob $out . '*' ) {
 	unlink $existing;
 }
 
-open(my $svg_template, '<', $card_svg);
-open(my $svg,          '>', "$out.svg");
+open(my $svg_template, '<:utf8', $card_svg);
+open(my $svg,          '>:utf8', "$out.svg");
 
 while(<$svg_template>) {
 
-	if ( m{($re)} ) {
-		warn "mapping $1\n";
-		s{($1)}{mapping($1)}ge;
+	foreach my $k (keys %$mapping) {
+		if ( index($_, $k) != -1 ) {
+			my $v = $mapping->{$k};
+			warn "mapping $k -> $v\n";
+			s{\Q$k\E}{$v}g;
+		}
 	}
 
 	print $svg $_;
 
 }
+
+
 
 close($svg_template);
 close($svg);
